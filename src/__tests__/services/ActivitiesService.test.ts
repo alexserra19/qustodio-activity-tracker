@@ -17,7 +17,7 @@ describe('ActivitiesService', () => {
         }
     ]
 
-    it('getPopularMedia', async () => {
+    it('getActivities', async () => {
         const adapterSpy = jest.spyOn(ActivitiesAdapter, 'JSONToActivitiesList').mockImplementation(() => mockResponseAdapter);
 
         const data = await ActivitiesService.getActivities()

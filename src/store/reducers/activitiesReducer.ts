@@ -1,25 +1,25 @@
 import { Activity } from '../../utils/typings';
-import mediaTypes from '../types/activitiesTypes';
+import activitiesTypes from '../types/activitiesTypes';
 
-export interface IMediaReducerState {
+export interface IActivitiesReducerState {
   activities: Array<Activity>;
   listLoaded: boolean
 }
 
-export const initialState: IMediaReducerState = {
+export const initialState: IActivitiesReducerState = {
   activities: [],
   listLoaded: false
 };
 
-const mediaReducer = (state: IMediaReducerState = initialState, action: any) => {
+const activitiesReducer = (state: IActivitiesReducerState = initialState, action: any) => {
   switch (action.type) {
-    case mediaTypes.INITIALIZE_FINISH:
+    case activitiesTypes.INITIALIZE_FINISH:
       return {
         ...state,
         activities: action.data.activities,
         listLoaded: true
       }
-    case mediaTypes.PERFORM_ACTIVITIES:
+    case activitiesTypes.PERFORM_ACTIVITIES:
       return {
         ...state,
         activities: state.activities.map(activity => action.data.activitiesIds.includes(activity.id)
@@ -30,6 +30,6 @@ const mediaReducer = (state: IMediaReducerState = initialState, action: any) => 
   }
 };
 
-export default mediaReducer;
+export default activitiesReducer;
 
 

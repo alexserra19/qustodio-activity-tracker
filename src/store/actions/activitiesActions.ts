@@ -1,22 +1,22 @@
-import mediaTypes from '../types/activitiesTypes';
+import activitiesTypes from '../types/activitiesTypes';
 import { Action } from 'redux';
 import { Activity } from '../../utils/typings';
 
 const activitiesActions: IActivitiesActions = {
   initializeStart() {
     return {
-      type: mediaTypes.INITIALIZE_START,
+      type: activitiesTypes.INITIALIZE_START,
     };
   },
   initializeFinish(activities: Array<Activity>) {
     return {
-      type: mediaTypes.INITIALIZE_FINISH,
+      type: activitiesTypes.INITIALIZE_FINISH,
       data: { activities }
     };
   },
   performActivities(activitiesIds: Array<number>) {
     return {
-      type: mediaTypes.PERFORM_ACTIVITIES,
+      type: activitiesTypes.PERFORM_ACTIVITIES,
       data: { activitiesIds }
     };
   },
