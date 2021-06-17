@@ -1,6 +1,8 @@
 const activitiesTypes = {
     INITIALIZE_START: 'INITIALIZE_START',
     INITIALIZE_FINISH: 'INITIALIZE_FINISH',
+    PERFORM_ACTIVITIES: 'PERFORM_ACTIVITIES',
+
 }
 
 export default activitiesTypes

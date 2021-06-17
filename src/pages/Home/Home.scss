@@ -1,6 +1,9 @@
 @import '../../styles/variables.scss';
 
-
 .homeContainer {
     text-align: center;
+}
+
+.ant-modal-confirm-content {
+    margin-left: 0 !important;
 }

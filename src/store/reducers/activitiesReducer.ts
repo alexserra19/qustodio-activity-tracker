@@ -19,6 +19,12 @@ const mediaReducer = (state: IMediaReducerState = initialState, action: any) => 
         activities: action.data.activities,
         listLoaded: true
       }
+    case mediaTypes.PERFORM_ACTIVITIES:
+      return {
+        ...state,
+        activities: state.activities.map(activity => action.data.activitiesIds.includes(activity.id)
+          ? { ...activity, timesPerformed: activity.timesPerformed + 1 } : activity)
+      }
     default:
       return state
   }

@@ -4,20 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import activitiesActions from '../../store/actions/activitiesActions';
 import _ from 'lodash';
-import helpers from '../../utils/helpers';
+import { Row, Col, Button, Modal } from 'antd';
+import { ActivitiesTable } from '../../components/ActivitiesTable/ActivitiesTable';
 import { Activity } from '../../utils/typings';
-import { Spin, Row, Col, Table } from 'antd';
-import activitiesColumns from '../../utils/tablesConfig/activitiesTableConfig'
 
 const Home = () => {
     const history = useHistory();
     const activities = useSelector((store: any) => store.activitiesReducer.activities);
     const listLoaded = useSelector((store: any) => store.activitiesReducer.listLoaded);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const dispatch = useDispatch()
     const [selectedActivities, setSelectedActivities] = useState([]);
-
-
 
     useEffect(() => {
         if (_.isEmpty(activities)) {
@@ -26,28 +24,38 @@ const Home = () => {
         }
     }, []);
 
-
-    useEffect(() => {
-        console.log('----------', activities)
-    }, [activities]);
-
-
     useEffect(() => {
         if (listLoaded) {
             setIsLoading(false)
         }
-
     }, [listLoaded])
 
+    const performActivities = () => {
+        const availableActivities = selectedActivities.filter((activity: Activity) => activity.covidFriendly);
+        const performIds = availableActivities.map((activity: Activity) => activity.id)
+        const unavailableActivities = selectedActivities.filter((activity: Activity) => !activity.covidFriendly);
 
-    const rowSelection = {
-        onChange: (selectedRowKeys: React.Key[], selectedRows: any) => {
-            setSelectedActivities(selectedRows)
-        },
-    };
+        if (!_.isEmpty(unavailableActivities)) displayWarningModal(unavailableActivities)
+        dispatch(activitiesActions.performActivities(performIds))
+    }
 
+    const displayWarningModal = (unavailableActivities: Array<Activity>) => {
+        Modal.warning({
+            title: 'The selected activities could not be performed:',
+            content: getDescriptions(unavailableActivities),
+        });
+    }
 
-    console.log('selectedRows', selectedActivities)
+    const getDescriptions = (activities: Array<Activity>) => {
+        return(
+            <ul>
+                {activities.map((activity: Activity) => {
+                    return <><br/><li key={activity.id}>{activity.title}</li></>
+                })}
+            </ul>
+        )
+    }
+
 
     return (
         <div>
@@ -57,21 +65,23 @@ const Home = () => {
                         <h1>My 2021 Activities</h1>
                     </Col>
                     <Col span={24}>
-                        <Table
-                            rowSelection={rowSelection}
-                            columns={activitiesColumns}
-                            dataSource={activities}
-                            loading={isLoading}
-                            rowKey={"id"}
+                        <ActivitiesTable
+                            updateSelectedActivities={setSelectedActivities}
+                            activities={activities}
+                            isLoading={isLoading}
                         />
                     </Col>
+                    <Col span={24}>
+                        {!_.isEmpty(selectedActivities) &&
+                            <Button
+                                type="primary"
+                                onClick={performActivities}
+                            >
+                                Perform Activities
+                            </Button>
+                        }
+                    </Col>
                 </Row>
-
-                {isLoading &&
-                    <Spin
-                        size="large"
-                    />
-                }
             </div>
         </div>
     )

@@ -8,12 +8,16 @@ const activitiesActions: IActivitiesActions = {
       type: mediaTypes.INITIALIZE_START,
     };
   },
-  initializeFinish(
-    activities: Array<Activity>,
-  ) {
+  initializeFinish(activities: Array<Activity>) {
     return {
       type: mediaTypes.INITIALIZE_FINISH,
       data: { activities }
+    };
+  },
+  performActivities(activitiesIds: Array<number>) {
+    return {
+      type: mediaTypes.PERFORM_ACTIVITIES,
+      data: { activitiesIds }
     };
   },
 }
@@ -22,7 +26,6 @@ export default activitiesActions;
 
 export interface IActivitiesActions {
   initializeStart: () => Action;
-  initializeFinish: (
-    activities: Array<Activity>,
-  ) => Action;
+  initializeFinish: (activities: Array<Activity>) => Action;
+  performActivities: (activitiesIds: Array<number>) => Action;
 }
