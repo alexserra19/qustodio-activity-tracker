@@ -3,15 +3,13 @@ import { Activity } from "../typings";
 class ActivitiesAdapter {
 
     JSONToActivitiesList(activitiesList: Array<any>): Array<Activity> {
-        let activitiesListAdapted = activitiesList.map((item, index) => {
+        let activitiesListAdapted = activitiesList.map((item) => {
             return (
                 {
-                    id: index,
-                    type: item.programType,
-                    title: item.title,
-                    description: item.description,
-                    date: item.releaseYear,
-                    image: item.images['Poster Art'].url,
+                    id: item.activity_id,
+                    title: item.activity_name,
+                    covidFriendly: item.covid_friendly,
+                    timesPerformed: item.times_performed,
                 }
             )
         })

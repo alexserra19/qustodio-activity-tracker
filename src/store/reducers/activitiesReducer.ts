@@ -3,12 +3,12 @@ import mediaTypes from '../types/activitiesTypes';
 
 export interface IMediaReducerState {
   activities: Array<Activity>;
-  listsLoaded: boolean
+  listLoaded: boolean
 }
 
 export const initialState: IMediaReducerState = {
   activities: [],
-  listsLoaded: false
+  listLoaded: false
 };
 
 const mediaReducer = (state: IMediaReducerState = initialState, action: any) => {
@@ -17,7 +17,7 @@ const mediaReducer = (state: IMediaReducerState = initialState, action: any) => 
       return {
         ...state,
         activities: action.data.activities,
-        listsLoaded: true
+        listLoaded: true
       }
     default:
       return state
