@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.scss'
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
 import activitiesActions from '../../store/actions/activitiesActions';
 import _ from 'lodash';
 import { Row, Col, Button, Modal } from 'antd';
@@ -9,13 +8,11 @@ import { ActivitiesTable } from '../../components/ActivitiesTable/ActivitiesTabl
 import { Activity } from '../../utils/typings';
 
 const Home = () => {
-    const history = useHistory();
     const activities = useSelector((store: any) => store.activitiesReducer.activities);
     const listLoaded = useSelector((store: any) => store.activitiesReducer.listLoaded);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const dispatch = useDispatch()
     const [selectedActivities, setSelectedActivities] = useState([]);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (_.isEmpty(activities)) {
@@ -49,13 +46,12 @@ const Home = () => {
     const getDescriptions = (activities: Array<Activity>) => {
         return(
             <ul>
-                {activities.map((activity: Activity) => {
-                    return <><br/><li key={activity.id}>{activity.title}</li></>
+                {activities.map((activity: Activity, index) => {
+                    return <li key={index}>{activity.title}</li>
                 })}
             </ul>
         )
     }
-
 
     return (
         <div>
