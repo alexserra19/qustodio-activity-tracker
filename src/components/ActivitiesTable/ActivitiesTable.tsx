@@ -20,7 +20,6 @@ export const ActivitiesTable = (props: IActivitiesTableProps) => {
 
     return (
         <div>
-
             <Table
                 rowSelection={{
                     ...rowSelection,
