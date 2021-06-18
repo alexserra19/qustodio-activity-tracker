@@ -32,8 +32,12 @@ const Home = () => {
         const performIds = availableActivities.map((activity: Activity) => activity.id)
         const unavailableActivities = selectedActivities.filter((activity: Activity) => !activity.covidFriendly);
 
-        if (!_.isEmpty(unavailableActivities)) displayWarningModal(unavailableActivities)
-        dispatch(activitiesActions.performActivities(performIds))
+        if (!_.isEmpty(unavailableActivities)) {
+            displayWarningModal(unavailableActivities)
+        } 
+        else {
+            dispatch(activitiesActions.performActivities(performIds))
+        }
     }
 
     const displayWarningModal = (unavailableActivities: Array<Activity>) => {
