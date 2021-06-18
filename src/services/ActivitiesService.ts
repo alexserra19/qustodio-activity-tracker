@@ -8,7 +8,6 @@ import activitiesMock from "../mocks/activitiesMock.json"
 class ActivitiesService {
 
     async getActivities(): Promise<Array<Activity>> {
-        let url = AppConstants.domain + configuration.routes.getAtivities
         // let response = await RequestInterceptorService.doRequest(url);
         let response = activitiesMock
         let data: Array<Activity> = []

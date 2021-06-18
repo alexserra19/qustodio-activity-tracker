@@ -3,7 +3,6 @@ const AppConstants = {
     // I have used a Reliable CORS proxy service in order to avoid CORS errors.
     // Without this fix I could not request from the URL .json you sent me.
     // https://blog.bridged.xyz/cors-anywhere-for-everyone-free-reliable-cors-proxy-service-73507192714e
-    domain: 'https://cors.bridged.cc/https://gitlab.com',
     colors: {
         red: '#ff2800',
         yellow: '#febc59',
