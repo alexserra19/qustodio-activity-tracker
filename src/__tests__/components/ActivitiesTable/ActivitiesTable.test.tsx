@@ -2,12 +2,9 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux';
-import { shallow, configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { ActivitiesTable } from '../../../components/ActivitiesTable/ActivitiesTable'
 
 jest.useFakeTimers()
-configure({ adapter: new Adapter() });
 
 const middlewares: any = []
 const mockStore = configureStore(middlewares)
