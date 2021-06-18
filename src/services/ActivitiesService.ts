@@ -1,8 +1,5 @@
-import AppConstants from "../utils/AppConstants";
-import configuration from "../api/config";
 import { Activity } from "../utils/typings";
 import ActivitiesAdapter from "../utils/adapters/ActivitiesAdapter";
-import RequestInterceptorService from "./RequestInterceptorService";
 import activitiesMock from "../mocks/activitiesMock.json"
 
 class ActivitiesService {
